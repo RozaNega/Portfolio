@@ -1,0 +1,367 @@
+﻿<nav class="navbar" [class.scrolled]="scrolled()">
+  <div class="container nav-content">
+    <a class="logo" (click)="scrollTo('hero')" aria-label="Go to home">RN</a>
+    <button
+      class="menu-toggle"
+      [class.active]="menuOpen()"
+      (click)="menuOpen.set(!menuOpen())"
+      aria-label="Toggle menu"
+      type="button"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" [class.open]="menuOpen()">
+      <a (click)="scrollTo('about')" [class.active]="activeSection() === 'about'">About</a>
+      <a (click)="scrollTo('experience')" [class.active]="activeSection() === 'experience'"
+        >Experience</a
+      >
+      <a (click)="scrollTo('skills')" [class.active]="activeSection() === 'skills'">Skills</a>
+      <a (click)="scrollTo('projects')" [class.active]="activeSection() === 'projects'">Project</a>
+      <a (click)="scrollTo('contact')" [class.active]="activeSection() === 'contact'">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero" class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-orb hero-orb-one"></div>
+  <div class="hero-orb hero-orb-two"></div>
+  <div class="hero-grid-lines"></div>
+
+  <div class="container hero-content">
+    <div class="hero-copy reveal">
+      <p class="eyebrow">Software Engineering Student</p>
+      <h1>Designing useful digital experiences with a creative eye.</h1>
+      <p class="subtitle">I’m also interested in graphics design and visual storytelling.</p>
+      <p class="description">
+        I build responsive web apps with a focus on clarity, useful workflows, and calm visual
+        design. I also use Photoshop and Illustrator when I want the visuals to feel more polished
+        and expressive.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" type="button" (click)="scrollTo('projects')">
+          View project
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="scrollTo('contact')">
+          Contact me
+        </button>
+      </div>
+
+      <div class="hero-tags">
+        @for (tag of heroTags; track tag) {
+          <span class="chip">{{ tag }}</span>
+        }
+      </div>
+
+      <div class="story-list">
+        @for (point of storyPoints; track point) {
+          <div class="story-item">
+            <span class="story-dot"></span>
+            <span>{{ point }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="portrait-card">
+        <div class="portrait-ribbon">Open to opportunities</div>
+        <div class="portrait-frame">
+          <div class="profile-photo" role="img" aria-label="Roza Nega portrait"></div>
+          <div class="portrait-overlay">
+            <p class="portrait-name">Roza Nega</p>
+            <h2>Software Engineering Student</h2>
+            <p>Graphics design with Photoshop and Illustrator</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        @for (metric of metrics; track metric.label) {
+          <article class="metric-card">
+            <span class="metric-value">{{ metric.value }}</span>
+            <span class="metric-label">{{ metric.label }}</span>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section section-about">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">About</p>
+      <h2>Practical UI with a creative finish</h2>
+      <p>
+        I like making software feel simple, neat, and useful. My focus is on interfaces that help
+        people get work done without distraction.
+      </p>
+    </div>
+
+    <div class="about-grid reveal">
+      <div class="about-panel about-panel-main">
+        <p>
+          My internship at Africom Technologies helped me understand how to shape real products, not
+          just nice-looking screens.
+        </p>
+        <p>
+          I care about responsive layouts, readable design, and building features that feel
+          dependable in daily use.
+        </p>
+      </div>
+
+      <div class="about-panel fact-panel">
+        <div class="fact-row">
+          <span class="fact-title">Internship</span>
+          <strong>Africom Technologies</strong>
+        </div>
+        <div class="fact-row">
+          <span class="fact-title">Project</span>
+          <strong>Property Automation System</strong>
+        </div>
+        <div class="fact-row">
+          <span class="fact-title">Stack</span>
+          <strong>Angular, ASP.NET, SQL</strong>
+        </div>
+        <div class="fact-row">
+          <span class="fact-title">Design</span>
+          <strong>Photoshop + Illustrator</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="section section-experience">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">Experience</p>
+      <h2>What the internship taught me</h2>
+      <p>
+        Four months at Africom Technologies gave me a better view of teamwork, delivery, and
+        building for real users.
+      </p>
+    </div>
+
+    <div class="timeline reveal">
+      @for (item of experience; track item.title) {
+        <article class="timeline-card">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-period">{{ item.period }}</span>
+              <div>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.organization }}</p>
+              </div>
+            </div>
+            <p class="timeline-summary">{{ item.summary }}</p>
+            <div class="timeline-list">
+              @for (detail of item.highlights; track detail) {
+                <div class="timeline-item">
+                  <span class="timeline-bullet"></span>
+                  <span>{{ detail }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section section-skills">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">Skills</p>
+      <h2>Tools I use to build useful interfaces</h2>
+      <p>
+        My stack centers on Angular and ASP.NET, with a strong interest in clean design and
+        practical implementation.
+      </p>
+    </div>
+
+    <div class="skills-grid reveal">
+      @for (group of skills; track group.title) {
+        <article class="skill-card">
+          <h3>{{ group.title }}</h3>
+          <ul>
+            @for (item of group.items; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="section section-projects">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">Project</p>
+      <h2>Property Automation System</h2>
+      <p>
+        My main project shows how I handle structure, usability, and the flow of a real business
+        application.
+      </p>
+    </div>
+
+    <div class="project-spotlight reveal">
+      <div class="project-visual">
+        <span class="project-badge">Case study</span>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.summary }}</p>
+        <div class="project-tags">
+          @for (tag of project.stack; track tag) {
+            <span class="chip chip-soft">{{ tag }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="project-details">
+        <div class="detail-block">
+          <span class="detail-label">Why it matters</span>
+          <p>{{ project.impact }}</p>
+        </div>
+
+        <div class="detail-block">
+          <span class="detail-label">Highlights</span>
+          <div class="highlight-list">
+            @for (item of project.highlights; track item) {
+              <div class="highlight-item">
+                <span class="highlight-dot"></span>
+                <span>{{ item }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="project-actions">
+          <button class="btn btn-primary" type="button" (click)="scrollTo('contact')">
+            Contact me
+          </button>
+          <button class="btn btn-secondary" type="button" (click)="scrollTo('skills')">
+            See stack
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section section-contact">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">Contact</p>
+      <h2>Let's connect</h2>
+      <p>
+        I’m available for opportunities where thoughtful UI, solid structure, and real problem
+        solving matter.
+      </p>
+    </div>
+
+    <div class="contact-grid reveal">
+      <div class="contact-card contact-details">
+        <h3>Reach me directly</h3>
+        <a class="contact-link" href="tel:0941130728">
+          <span class="contact-icon">P</span>
+          <div>
+            <span class="contact-label">Phone</span>
+            <strong>0941130728</strong>
+          </div>
+        </a>
+        <a class="contact-link" href="mailto:rozanega15@gmail.com">
+          <span class="contact-icon">@</span>
+          <div>
+            <span class="contact-label">Email</span>
+            <strong>rozanega15@gmail.com</strong>
+          </div>
+        </a>
+        <a class="contact-link" href="https://t.me/Rozaliya_21" target="_blank" rel="noopener">
+          <span class="contact-icon contact-icon-telegram" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+              <path
+                d="M9.7 15.3 9.4 19c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.2.2 1.4-.7l2.5-11.7c.2-1-.4-1.4-1.1-1.2L3.8 10.3c-1 .4-1 1 .2 1.4l4.1 1.3 9.6-6c.5-.3.9-.1.5.2"
+              />
+            </svg>
+          </span>
+          <div>
+            <span class="contact-label">Telegram</span>
+            <strong>@Rozaliya_21</strong>
+          </div>
+        </a>
+        <a
+          class="contact-link"
+          href="https://instagram.com/rozi_nega"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="contact-icon contact-icon-instagram" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+              <path
+                d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 2.2A4.8 4.8 0 1 1 7.2 11 4.8 4.8 0 0 1 12 6.2zm0 2A2.8 2.8 0 1 0 14.8 11 2.8 2.8 0 0 0 12 8.2zM17.6 5.6a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"
+              />
+            </svg>
+          </span>
+          <div>
+            <span class="contact-label">Instagram</span>
+            <strong>@rozi_nega</strong>
+          </div>
+        </a>
+        <div class="contact-note">Open to frontend and full-stack opportunities.</div>
+      </div>
+
+      <form class="contact-form" (submit)="sendEmail($event)">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your name" class="form-input" required />
+          <input type="email" name="email" placeholder="Your email" class="form-input" required />
+        </div>
+        <textarea
+          name="message"
+          placeholder="Tell me about the role, project, or idea"
+          class="form-input form-textarea"
+          rows="5"
+          required
+        ></textarea>
+        <button
+          type="submit"
+          class="btn btn-primary btn-submit"
+          [disabled]="formState() === 'sending'"
+        >
+          {{ formState() === 'sending' ? 'Sending...' : 'Send message' }}
+        </button>
+        <p
+          class="form-status"
+          [class.is-success]="formState() === 'success'"
+          [class.is-error]="formState() === 'error'"
+        >
+          @if (formState() === 'success') {
+            Message sent successfully.
+          } @else if (formState() === 'error') {
+            Fill in your EmailJS service ID, template ID, and public key first.
+          } @else {
+            Messages are sent directly to your Gmail inbox through EmailJS.
+          }
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <p>&copy; 2026 Roza Nega. Built with Angular.</p>
+    <div class="footer-links">
+      <a href="#hero" (click)="$event.preventDefault(); scrollTo('hero')">Back to top</a>
+      <a href="#projects" (click)="$event.preventDefault(); scrollTo('projects')">Project</a>
+      <a href="#contact" (click)="$event.preventDefault(); scrollTo('contact')">Contact</a>
+    </div>
+  </div>
+</footer>
+
