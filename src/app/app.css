@@ -484,7 +484,7 @@
   position: absolute;
 
   inset: 0;
-  background: url('../assets/images/profile1.png') center 8%/cover no-repeat;
+  background: url('../assets/images/profile12.png') center 8%/cover no-repeat;
   filter: saturate(1.08) contrast(1.05) brightness(1.12);
   transform: scale(1.03);
   z-index: 0;
