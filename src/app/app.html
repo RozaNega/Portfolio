@@ -1,4 +1,10 @@
-﻿<nav class="navbar" [class.scrolled]="scrolled()">
+﻿<div class="scroll-progress" id="scroll-progress">
+  <div class="scroll-progress-thumb" id="scroll-thumb"></div>
+</div>
+
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<nav class="navbar" [class.scrolled]="scrolled()">
   <div class="container nav-content">
     <a class="logo" (click)="scrollTo('hero')" aria-label="Go to home">RN</a>
     <button
@@ -29,12 +35,13 @@
   <div class="hero-orb hero-orb-one"></div>
   <div class="hero-orb hero-orb-two"></div>
   <div class="hero-grid-lines"></div>
+  <div class="hero-particles" id="hero-particles"></div>
 
   <div class="container hero-content">
-    <div class="hero-copy reveal">
+    <div class="hero-copy reveal from-left">
       <p class="eyebrow">Software Engineering Student</p>
       <h1>Designing useful digital experiences with a creative eye.</h1>
-      <p class="subtitle">I’m also interested in graphics design and visual storytelling.</p>
+      <p class="subtitle">I'm also interested in graphics design and visual storytelling.</p>
       <p class="description">
         I build responsive web apps with a focus on clarity, useful workflows, and calm visual
         design. I also use Photoshop and Illustrator when I want the visuals to feel more polished
@@ -66,11 +73,13 @@
       </div>
     </div>
 
-    <div class="hero-visual reveal">
-      <div class="portrait-card">
+    <div class="hero-visual reveal from-right">
+      <div class="portrait-card" data-tilt data-glow>
         <div class="portrait-ribbon">Open to opportunities</div>
         <div class="portrait-frame">
           <div class="profile-photo" role="img" aria-label="Roza Nega portrait"></div>
+          <div class="portrait-scanline"></div>
+          <div class="portrait-vignette"></div>
           <div class="portrait-overlay">
             <p class="portrait-name">Roza Nega</p>
             <h2>Software Engineering Student</h2>
@@ -81,7 +90,7 @@
 
       <div class="metrics-grid">
         @for (metric of metrics; track metric.label) {
-          <article class="metric-card">
+          <article class="metric-card" data-glow>
             <span class="metric-value">{{ metric.value }}</span>
             <span class="metric-label">{{ metric.label }}</span>
           </article>
@@ -92,8 +101,9 @@
 </section>
 
 <section id="about" class="section section-about">
+  <div class="section-progress-line"></div>
   <div class="container">
-    <div class="section-heading reveal">
+    <div class="section-heading reveal from-bottom">
       <p class="section-kicker">About</p>
       <h2>Practical UI with a creative finish</h2>
       <p>
@@ -102,8 +112,8 @@
       </p>
     </div>
 
-    <div class="about-grid reveal">
-      <div class="about-panel about-panel-main">
+    <div class="about-grid reveal from-left">
+      <div class="about-panel about-panel-main" data-glow>
         <p>
           My internship at Africom Technologies helped me understand how to shape real products, not
           just nice-looking screens.
@@ -137,8 +147,9 @@
 </section>
 
 <section id="experience" class="section section-experience">
+  <div class="section-progress-line"></div>
   <div class="container">
-    <div class="section-heading reveal">
+    <div class="section-heading reveal from-bottom">
       <p class="section-kicker">Experience</p>
       <h2>What the internship taught me</h2>
       <p>
@@ -147,9 +158,9 @@
       </p>
     </div>
 
-    <div class="timeline reveal">
+    <div class="timeline reveal from-bottom">
       @for (item of experience; track item.title) {
-        <article class="timeline-card">
+        <article class="timeline-card" data-glow>
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-header">
@@ -176,8 +187,9 @@
 </section>
 
 <section id="skills" class="section section-skills">
+  <div class="section-progress-line"></div>
   <div class="container">
-    <div class="section-heading reveal">
+    <div class="section-heading reveal from-bottom">
       <p class="section-kicker">Skills</p>
       <h2>Tools I use to build useful interfaces</h2>
       <p>
@@ -186,9 +198,9 @@
       </p>
     </div>
 
-    <div class="skills-grid reveal">
+    <div class="skills-grid reveal from-scale">
       @for (group of skills; track group.title) {
-        <article class="skill-card">
+        <article class="skill-card" data-tilt data-glow>
           <h3>{{ group.title }}</h3>
           <ul>
             @for (item of group.items; track item) {
@@ -202,8 +214,9 @@
 </section>
 
 <section id="projects" class="section section-projects">
+  <div class="section-progress-line"></div>
   <div class="container">
-    <div class="section-heading reveal">
+    <div class="section-heading reveal from-bottom">
       <p class="section-kicker">Project</p>
       <h2>Property Automation System</h2>
       <p>
@@ -212,62 +225,90 @@
       </p>
     </div>
 
-    <div class="project-spotlight reveal">
-      <div class="project-visual">
-        <span class="project-badge">Case study</span>
-        <h3>{{ project.title }}</h3>
-        <p>{{ project.summary }}</p>
-        <div class="project-tags">
-          @for (tag of project.stack; track tag) {
-            <span class="chip chip-soft">{{ tag }}</span>
-          }
-        </div>
-      </div>
+    @for (proj of projects; track proj.title; let i = $index) {
+      @if (i === 0) {
+        <div class="project-spotlight reveal from-scale" data-tilt data-glow>
+          <div class="project-visual">
+            <span class="project-badge">Case study</span>
+            <h3>{{ proj.title }}</h3>
+            <p>{{ proj.summary }}</p>
+            <div class="project-tags">
+              @for (tag of proj.stack; track tag) {
+                <span class="chip chip-soft">{{ tag }}</span>
+              }
+            </div>
+          </div>
 
-      <div class="project-details">
-        <div class="detail-block">
-          <span class="detail-label">Why it matters</span>
-          <p>{{ project.impact }}</p>
-        </div>
+          <div class="project-details">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <p>{{ proj.impact }}</p>
+            </div>
 
-        <div class="detail-block">
-          <span class="detail-label">Highlights</span>
-          <div class="highlight-list">
-            @for (item of project.highlights; track item) {
-              <div class="highlight-item">
-                <span class="highlight-dot"></span>
-                <span>{{ item }}</span>
+            <div class="detail-block">
+              <span class="detail-label">Highlights</span>
+              <div class="highlight-list">
+                @for (item of proj.highlights; track item) {
+                  <div class="highlight-item">
+                    <span class="highlight-dot"></span>
+                    <span>{{ item }}</span>
+                  </div>
+                }
               </div>
-            }
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-secondary" type="button" (click)="scrollTo('contact')">
+                Contact me
+              </button>
+              <button class="btn btn-secondary" type="button" (click)="scrollTo('skills')">
+                See stack
+              </button>
+            </div>
           </div>
         </div>
-
-        <div class="project-actions">
-          <button class="btn btn-primary" type="button" (click)="scrollTo('contact')">
-            Contact me
-          </button>
-          <button class="btn btn-secondary" type="button" (click)="scrollTo('skills')">
-            See stack
-          </button>
-        </div>
-      </div>
-    </div>
+      } @else {
+        <a
+          class="edutrack-banner reveal from-scale"
+          [href]="proj.link"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="edutrack-bg"></div>
+          <div class="edutrack-icon edutrack-icon-1">&#x1F4DA;</div>
+          <div class="edutrack-icon edutrack-icon-2">&#x1F4C5;</div>
+          <div class="edutrack-icon edutrack-icon-3">&#x1F4CB;</div>
+          <div class="edutrack-icon edutrack-icon-4">&#x1F514;</div>
+          <div class="edutrack-icon edutrack-icon-5">&#x1F393;</div>
+          <div class="edutrack-icon edutrack-icon-6">&#x270F;&#xFE0F;</div>
+          <div class="edutrack-content">
+            <span class="edutrack-badge">&#x1F680; Deployed</span>
+            <h3 class="edutrack-title">EduTrack</h3>
+            <p class="edutrack-tagline">Manage Learning, Track Progress</p>
+            <div class="edutrack-meta">
+              <span>Student Task &amp; Learning Management System</span>
+            </div>
+            <div class="edutrack-link">{{ proj.link }}</div>
+          </div>
+        </a>
+      }
+    }
   </div>
 </section>
 
 <section id="contact" class="section section-contact">
+  <div class="section-progress-line"></div>
   <div class="container">
-    <div class="section-heading reveal">
+    <div class="section-heading reveal from-bottom">
       <p class="section-kicker">Contact</p>
       <h2>Let's connect</h2>
       <p>
-        I’m available for opportunities where thoughtful UI, solid structure, and real problem
+        I'm available for opportunities where thoughtful UI, solid structure, and real problem
         solving matter.
       </p>
     </div>
 
-    <div class="contact-grid reveal">
-      <div class="contact-card contact-details">
+    <div class="contact-grid reveal from-bottom">
+      <div class="contact-card contact-details" data-glow>
         <h3>Reach me directly</h3>
         <a class="contact-link" href="tel:0941130728">
           <span class="contact-icon">P</span>
@@ -345,8 +386,7 @@
             Message sent successfully.
           } @else if (formState() === 'error') {
             Fill in your EmailJS service ID, template ID, and public key first.
-          } @else {
-            Messages are sent directly to your Gmail inbox through EmailJS.
+          
           }
         </p>
       </form>
@@ -356,7 +396,7 @@
 
 <footer class="footer">
   <div class="container footer-content">
-    <p>&copy; 2026 Roza Nega. Built with Angular.</p>
+    <p>&copy; 2026 Roza Nega.</p>
     <div class="footer-links">
       <a href="#hero" (click)="$event.preventDefault(); scrollTo('hero')">Back to top</a>
       <a href="#projects" (click)="$event.preventDefault(); scrollTo('projects')">Project</a>
@@ -364,4 +404,3 @@
     </div>
   </div>
 </footer>
-
